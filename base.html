@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Base</title>
+</head>
+
+<body>
+    <input type="file" name="image" id="demo" onchange="based(this)">
+    <div id="images"></div>
+
+    <script>
+        var a = [];
+
+        //base 64 convert
+        function based(e) {
+            var file = e.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function() {
+                console.log('RESULT', reader.result);
+                a.push(reader.result)
+            }
+
+            reader.readAsDataURL(file);
+
+            //image add and delete button
+            setTimeout(() => {
+                document.getElementById("images").innerHTML = "";
+                for (var i = 0; i < a.length; i++) {
+                    $("#images").append("<div id= ign" + i + "><img style= width:15%; height:10%  src=" + a[i] + ">" +
+                        "<button type='button' onClick='removee(" + i + ")'> Delete! </button> </div><br> ");
+                }
+            }, 1500);
+
+        }
+
+        //remove function
+        function removee(elem) {
+            $("#ign" + elem).remove();
+            a.splice(elem, 1);
+            console.log(elem)
+        }
+    </script>
+</body>
+
+</html>
